@@ -1,29 +1,30 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Monica Lester
+**Student ID:** 132761938
 **Course:** CS 460 – Algorithms | Spring 2026
 
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
 
 ---
 
 ## Part 1: Problem Analysis
 
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
+
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
-
+  We cannot determine the most fuel-efficient path to grabbing all the relics in the dungeon with a single
+  shortest-path run.
+  A single shortest-path run would tell us the most fuel-efficient path to each node, but cannot decide the 
+  best order in which to visit them, with our main goal in mind.
+  
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+  Once we know all inter-location costs, we must decide the order in which to traverse the nodes to collect 
+  all relics using the least fuel.
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+  Since we want to find the path to all relics using the minimum amount of fuel,
+  and there are multiple visitation orders to the necessary nodes, all with different fuel costs,
+  we must search through these different orders to find that which is most fuel efficient.
 
 ---
 
@@ -31,24 +32,24 @@
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| start_node (S) | we must start at the entrance (node S), and find all shortest paths to each relic, so (S) is our "base" starting node |
+|---|---|
+| relic_node | once we reach our first relic node traversing from S, that relic node now becomes our new source node to find the most efficient path to the next relic node - rinse and repeat until we reach the exit (T). |
 
 ### Part 2b: Distance Storage
 
-> Fill in the table. No prose required.
+
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | (Nested) Dictionary/Hash map |
+| What the keys represent | key_i (outer key)= source node, key_j (inner) = terminal node |
+| What the values represent | shortest path distance between key_i -> key_j|
+| Lookup time complexity | O(1)|
+| Why O(1) lookup is possible | The lovely average time-complexity of hash maps - constant time - what a wonderful thing it is. |
 
 ### Part 2c: Precomputation Complexity
 

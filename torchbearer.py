@@ -31,10 +31,27 @@ def explain_problem():
     str
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
-
-    TODO
     """
-    return "TODO"
+    ans_1 = (
+        "We cannot determine the most fuel-efficient path to grabbing "
+        "all the relics in the dungeon with a single shortest-path run. "
+        "A single shortest-path run tells us the most fuel-efficient path "
+        "to each node, but cannot decide the best order in which to visit them.\n"
+    )
+
+    ans_2 = (
+        "Once we know all inter-location costs, we must decide the order "
+        "in which to traverse the nodes to collect all relics using the least fuel.\n"
+    )
+
+    ans_3 = (
+        "Since there are multiple visitation orders to the necessary nodes "
+        "with different fuel costs, we must search through these orders to "
+        "find the most fuel-efficient one.\n"
+    )
+
+    return ans_1 + ans_2 + ans_3
+
 
 
 # =============================================================================
@@ -56,7 +73,18 @@ def select_sources(spawn, relics, exit_node):
 
     TODO
     """
-    pass
+    #inialize list with the starting (spawn) node
+    source_nodes = [spawn]
+    #iterate through the list of relic nodes and add them all to source_nodes
+    #
+    for node in relics:
+        #we check to avoid duplicates
+        if node not in source_nodes:
+            source_nodes.append(node)
+    #we dont add exit_node since it will never be a starting node,
+    #only a terminal node and we assume it cannot contain a relic
+    return source_nodes
+
 
 
 def run_dijkstra(graph, source):
@@ -75,7 +103,19 @@ def run_dijkstra(graph, source):
 
     TODO
     """
-    pass
+    #initialize a list to keep track of distances between nodes
+    # then turn it into a priority queue, so that the node with 
+    # the smallest distance to traverse to it is at the top of the queue
+    # initialze with source
+    node_dist = [source]
+    heapq.heapify(node_dist)
+    #initialize return disctionary with source and a distance of 0 
+    # (since the distance between source and itself is 0)
+    # We will log the min distance to reach all nodes in the graph 
+    # from the source
+    min_node_dist=[source, 0]
+
+    curr_node
 
 
 def precompute_distances(graph, spawn, relics, exit_node):

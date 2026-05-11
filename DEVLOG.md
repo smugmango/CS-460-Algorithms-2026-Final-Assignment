@@ -1,21 +1,19 @@
 # Development Log – The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Monica Lester
+**Student ID:** 132761938
 
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
+
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – [5/10/26, 4:19 PM]: Initial Plan
 
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
 
-_Your entry here._
+
+ I plan to work through this assignment step-by-step in the order it’s laid out. I’ve already read through ASSIGNMENT.md and README.md, and skimmed the torchbearer.py file to get a sense of what I’ll be working with. I filled out Parts 1 and 2 of the README first, and now I’m moving into the .py file to start implementing the TODOs. I’ll start with the easier functions like explain_problem() and select_sources(), then move into Dijkstra and precomputing distances before getting into the search and pruning logic. I expect the hardest part will be the recursive search in _explore(), especially making sure I don’t accidentally prune the optimal solution. I also think keeping track of visited relics cleanly might take some thought. For testing, I’ll use the provided test cases in the file and also try a few small graphs that I can reason through by hand to make sure everything is working correctly.
+
+ [4:32] Completed Part 1, and code-wise completed explain_problem() and select_sources(). Began to look at run_dijkstra(g,s), but short day today. Bigger day tomorrow.
 
 ---
 
