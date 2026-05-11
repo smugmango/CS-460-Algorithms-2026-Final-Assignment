@@ -22,7 +22,12 @@
 
 
  - [11:33 AM] Completed run_dijkstra(g,s) utilizing CS 460 Practice Quiz as a reference. Made sure to comment thoroughly, but we'll see how long that habit sticks for. Luckily, didn't run into any major issues or bugs. Next objective is Part 2c in README.md and precompute_distances(g,s,r,e).
+
  - [12:00 PM] Completed Part 2c in README.md. Have to run to class and plan to continue working later in the day. 
+
+ - [3:35 PM] Completed precompute_distances(g,s,r,e). No big issues -- its a pretty simple function thanks to the defined before it. 
+
+ - [4:20 PM] Written portion of Part 3 complete and "coding" component filled out. Moving onto Part 4 after a snack, 
  
 ---
 

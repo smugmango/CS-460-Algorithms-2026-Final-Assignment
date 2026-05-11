@@ -68,38 +68,33 @@ Note the variables $n=|V|,m=|E|$, and $k=|M|$.
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
 
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  For some node $n\in S$, 'dist[n]' is the *shortest possible path* to take from the source node to $n$. This distance will not change again.
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  For some node $n \notin S$, 'dist[n]' is the shortest path *we have encountered* from the source node to $n$. If a new shorter path is encountered, the 'dist[n]' will be updated with that new path.
 
 ### Part 3b: Why Each Phase Holds
 
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  - 'dist[source]' = 0, and for all $n \in V$, 'dist[n]' $\geq 0$.
+  - We have not visited any nodes (other than the source which we established we know the final distance of will always be 0), so the shortest path between them and the source could be some unknown, infinitely large value, and we have no other data to invalidate a distance of 'dist[n]' = $\infty$.
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  - We always pick the node with the smallest current `dist[n]` via the min heap/priority queue.
+  - Since all edge weights are nonnegative, any other path to this node would have to go through nodes with equal or larger distances, so it can’t end up being shorter.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  - The invariant guarantees that 'dist[n]' will hold the finalized shortest possible paths between the source node and all other (reachable) nodes in the graph. 
 
 ### Part 3c: Why This Matters for the Route Planner
 
-> One sentence connecting correct distances to correct routing decisions.
 
-_Your answer here._
+We must be able to trust that our list of shortest paths is correct when comparing relic orders so that we avoid accidentatlly taking an longer path when traversing the graph from spawn to exit, picking up all the relics as we go.
 
 ---
 

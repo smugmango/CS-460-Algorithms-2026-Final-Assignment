@@ -168,7 +168,17 @@ def precompute_distances(graph, spawn, relics, exit_node):
 
     TODO
     """
-    pass
+    # Initialize return dictionary that will hold the dijkstra results (i.e. shortest path) between every
+    # source node and all other nodes in the graph
+    node_distances = {}
+    # Use select_sources(s,r,e) to find all relevant source nodes in graph
+    source_nodes = select_sources(spawn, relics, exit_node)
+    # Iterate though source_nodes and add each node
+    # to node_distances, computing the shortest paths with run_dijkstra(graph, source).
+    for node in source_nodes:
+        node_distances[node] = run_dijkstra(graph, node)
+    # Return node_distances once all relevant nodes have been added to it.
+    return node_distances
 
 
 # =============================================================================
@@ -185,7 +195,37 @@ def dijkstra_invariant_check():
 
     TODO
     """
-    return "TODO"
+    # 3a
+    ans_1 = (
+        "What the Invariant Means: \n",
+        r"For some node $n\in S$, 'dist[n]' is the shortest ",
+        "possible path to take from the source node to $n$.",
+        " This distance will not change again.\n",
+        r"For some node $n \notin S$, 'dist[n]' is the ",
+        r"shortest path we have encountered from the source node",
+        " to $n$. If a new shorter path is encountered, the 'dist[n]' ",
+        "will be updated with that new path.\n"
+    )
+
+    # 3b
+    ans_2 = (
+        "Intitialization: \n",
+        r"\t - 'dist[source]' = 0, and for all $n \in V$, 'dist[n]' $\geq 0$. \n",
+        r"\t - We have not visited any nodes (other than the source which we established we know the final distance of will always be 0), so the shortest path between them and the source could be some unknown, infinitely large value, and we have no other data to invalidate a distance of 'dist[n]' = $\infty$. \n\n"
+        "Maintenance: \n",
+        "\t - We always pick the node with the smallest current `dist[n]` via the min heap.\n",
+        "\t - Since all edge weights are nonnegative, any other path to this node would have to go through nodes with equal or larger distances, so it can’t end up being shorter. \n\n",
+        "Termination:\n",
+        "\t - The invariant guarantees that 'dist[n]' will hold the finalized shortest possible paths between the source node and all other (reachable) nodes in the graph. \n "
+    )
+
+    # 3c
+    ans_3 = (
+        "Why this is Important for the Route Planner: \n",
+        "We must be able to trust that our list of shortest paths is correct when comparing relic orders so that we avoid accidentatlly taking an longer path when traversing the graph from spawn to exit, picking up all the relics as we go.\n"
+    )
+
+    return ans_1+ans_2+ans_3
 
 
 # =============================================================================
