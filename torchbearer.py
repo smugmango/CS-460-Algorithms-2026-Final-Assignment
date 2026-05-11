@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Monica Lester
+Student ID:   132761938
 
 INSTRUCTIONS
 ------------
@@ -53,7 +53,6 @@ def explain_problem():
     return ans_1 + ans_2 + ans_3
 
 
-
 # =============================================================================
 # PART 2
 # =============================================================================
@@ -73,18 +72,16 @@ def select_sources(spawn, relics, exit_node):
 
     TODO
     """
-    #inialize list with the starting (spawn) node
+    # inialize list with the starting (spawn) node
     source_nodes = [spawn]
-    #iterate through the list of relic nodes and add them all to source_nodes
-    #
+    # iterate through the list of relic nodes and add them all to source_nodes
     for node in relics:
-        #we check to avoid duplicates
+        # we check to avoid duplicates
         if node not in source_nodes:
             source_nodes.append(node)
-    #we dont add exit_node since it will never be a starting node,
-    #only a terminal node and we assume it cannot contain a relic
+    # we dont add exit_node since it will never be a starting node,
+    # only a terminal node and we assume it cannot contain a relic
     return source_nodes
-
 
 
 def run_dijkstra(graph, source):
@@ -103,19 +100,55 @@ def run_dijkstra(graph, source):
 
     TODO
     """
-    #initialize a list to keep track of distances between nodes
-    # then turn it into a priority queue, so that the node with 
+    # Utilizied CS 460 Practice Quiz as a reference for implementation.
+
+    # initialize a list of tuples to keep track of distances between nodes
+    # then turn it into a priority queue, so that the node with
     # the smallest distance to traverse to it is at the top of the queue
     # initialze with source
-    node_dist = [source]
-    heapq.heapify(node_dist)
-    #initialize return disctionary with source and a distance of 0 
-    # (since the distance between source and itself is 0)
-    # We will log the min distance to reach all nodes in the graph 
-    # from the source
-    min_node_dist=[source, 0]
+    node_check_list = [(0, source)]
+    heapq.heapify(node_check_list)
+    # Initialize return disctionary
+    min_node_dist = {}
+    # and then iterate through graph, adding all other nodes such that (node, inf).
+    # We will update the min distance from source node (source or relic)
+    # and all other nodes when a shorter path is found.
+    for node in graph:
+        min_node_dist[node] = float('inf')
+    # Then correct distance to source node with (source, 0),
+    # (since the distance between source and itself is 0).
+    min_node_dist[source] = float(0)
 
-    curr_node
+    # We iterate until node_check_list is empty (i.e. no nodes in
+    # the graph left to check):
+    while node_check_list:
+        # pop top (prioritized) node from heap and store in curr_node
+        (curr_dist, curr_node) = node_check_list.pop()
+        # check to see if min distance to curr_node which has been logged
+        # in min_node_dist is less than curr_dist. If not, then skip
+        # and move to next iteration of loop
+        if curr_dist > min_node_dist[curr_node]:
+            continue
+
+        # Iterate through all adjacent nodes to curr_node and check if
+        # the distance between curr_node and adj_node is smaller than
+        # the current min traveral path to adj_node logged in min_node_dist
+        # If smaller, then update min_node_dist of adj_node as a shorter path
+        # to it has been found, and then add it to check list to check
+        # adjacent nodes of adj_node in a future iteration of loop.
+        #
+        # This process allows us to follow through every shortest traversal
+        # path within the graph and continue updating min_node_dist until
+        # we have found the shortest path from the source to every node in
+        # the graph.
+        for (adj_node, adj_dist) in graph[curr_node]:
+            if min_node_dist[curr_node] + adj_dist < min_node_dist[adj_node]:
+                min_node_dist[adj_node] = min_node_dist[curr_node] + adj_dist
+                heapq.heappush(node_check_list,
+                               (min_node_dist[adj_node], adj_node))
+    # Once we exit the while loop, min_node_dist has been finalized with all shortest paths
+    # from source to every node in graph, and we return min_node_dist
+    return min_node_dist
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
