@@ -17,7 +17,7 @@
 
 ---
 
-## Entry 2 – [5/11/26, 10:46 AM]: 
+## Entry 2 – [5/11/26, 10:46 AM] Parts 2-3
 
 
 
@@ -27,14 +27,17 @@
 
  - [3:35 PM] Completed precompute_distances(g,s,r,e). No big issues -- its a pretty simple function thanks to the defined before it. 
 
- - [4:20 PM] Written portion of Part 3 complete and "coding" component filled out. Moving onto Part 4 after a snack, 
+ - [4:20 PM] Written portion of Part 3 complete and "coding" component filled out. 
+
  
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – [5/11/26, 6:09 PM]: Part 4
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
+
+- Written portion of Part 4 complete. I struggled a bit coming up with a good counter example graph, as I didn't want to make it too big or complex, but I think I was missing the mark on what was important to a greedy counter example, focusing more on the cost of individual edges rather than the bigger picture of forcing some inoptimal pathing due to picking the closest relic node. I also think that thinking like a person and not like a computer added some struggle to that, since I wasn't thinking about the amount of doubling back through previous explored paths resulting in a shorter overall path. I was able to figure something out in the end, and then spent 30 minutes fighting with the tikZ library in LaTeX to make it into a nice diagram. Overall, I am happy with it. Will be back again later -- hoping to be able to knock out the bulk of the project so then tomorrow is just final touches. 
 
 ---
 
