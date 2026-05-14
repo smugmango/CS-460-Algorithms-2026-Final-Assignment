@@ -192,40 +192,38 @@ def dijkstra_invariant_check():
     str
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
-
-    TODO
     """
     # 3a
     ans_1 = (
-        "What the Invariant Means: \n",
-        r"For some node $n\in S$, 'dist[n]' is the shortest ",
-        "possible path to take from the source node to $n$.",
-        " This distance will not change again.\n",
-        r"For some node $n \notin S$, 'dist[n]' is the ",
-        r"shortest path we have encountered from the source node",
-        " to $n$. If a new shorter path is encountered, the 'dist[n]' ",
+        "What the Invariant Means: \n"
+        r"For some node $n\in S$, 'dist[n]' is the shortest "
+        "possible path to take from the source node to $n$."
+        " This distance will not change again.\n"
+        r"For some node $n \notin S$, 'dist[n]' is the "
+        r"shortest path we have encountered from the source node"
+        " to $n$. If a new shorter path is encountered, the 'dist[n]' "
         "will be updated with that new path.\n"
     )
 
     # 3b
     ans_2 = (
-        "Intitialization: \n",
-        r"\t - 'dist[source]' = 0, and for all $n \in V$, 'dist[n]' $\geq 0$. \n",
+        "Intitialization: \n"
+        r"\t - 'dist[source]' = 0, and for all $n \in V$, 'dist[n]' $\geq 0$. \n"
         r"\t - We have not visited any nodes (other than the source which we established we know the final distance of will always be 0), so the shortest path between them and the source could be some unknown, infinitely large value, and we have no other data to invalidate a distance of 'dist[n]' = $\infty$. \n\n"
-        "Maintenance: \n",
-        "\t - We always pick the node with the smallest current `dist[n]` via the min heap.\n",
-        "\t - Since all edge weights are nonnegative, any other path to this node would have to go through nodes with equal or larger distances, so it can’t end up being shorter. \n\n",
-        "Termination:\n",
+        "Maintenance: \n"
+        "\t - We always pick the node with the smallest current `dist[n]` via the min heap.\n"
+        "\t - Since all edge weights are nonnegative, any other path to this node would have to go through nodes with equal or larger distances, so it can’t end up being shorter. \n\n"
+        "Termination:\n"
         "\t - The invariant guarantees that 'dist[n]' will hold the finalized shortest possible paths between the source node and all other (reachable) nodes in the graph. \n "
     )
 
     # 3c
     ans_3 = (
-        "Why this is Important for the Route Planner: \n",
+        "Why this is Important for the Route Planner: \n"
         "We must be able to trust that our list of shortest paths is correct when comparing relic orders so that we avoid accidentatlly taking an longer path when traversing the graph from spawn to exit, picking up all the relics as we go.\n"
     )
 
-    return ans_1+ans_2+ans_3
+    return ans_1 + ans_2 + ans_3
 
 
 # =============================================================================
@@ -239,10 +237,27 @@ def explain_search():
     str
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
-
-    TODO
     """
-    return "TODO"
+    # 4
+    ans_1 = (
+        "Why Greedy Fails: \n"
+        "The failure mode: \n"
+        "\t - A locally cheap choice (i.e. next closest relic) can domino and force far more expensive choices in the future.\n"
+        "Counter-example setup: \n"
+        r"\t - Consider the graph above. We spawn at node $S$, nodes $A$ and $B$ contain relics, and the exit is at node $T$. " "\n"
+        "What greedy picks: \n"
+        r"\t - Since $S \to A < S \to B$, greedy will choose to go to node $A$ first." "\n"
+        "What optimal picks: \n"
+        r"\t - Optimal will pick the path starting from $B$: $S \to B \to S \to A \to T$" "\n"
+        r"Why greedy loses: While $A$ is closer to $S$ than $B$, the total path from $S \to B \to S \to A \to T = 6$ is much cheaper than any option where we traverse to $A$ before $B$. For example:" "\n"
+        r"\t - Greedy Path $(i)$: $S \to A \to S \to B \to \to S \to A \to T = 8$." "\n"
+        r"\t - Greedy Path $(ii)$: $S \to A \to B \to T = 111$" "\n"
+        r"\t - Greedy Path $(iii)$: $S \to A \to B \to A \to T = 22$." "\n"
+        "\t - etc.\n"
+        "So greedy loses because choosing the closest relic $A$ first results in a more expensive order overall.\n"
+    )
+
+    return ans_1
 
 
 # =============================================================================
@@ -269,7 +284,12 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
     TODO
     """
-    pass
+    # Initialize a set to log the relics which have been collected
+    collected_relics = {}
+    curr_node = spawn
+    fuel_burned = 0
+
+
 
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
@@ -286,7 +306,8 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     relics_visited_order : list[node]
     cost_so_far : float
     exit_node : node
-    best : list
+    best : list -> best[0] = (float) minimum fuel cost found so far (initialized at 'inf'),
+                   best[1] = [] ordered list of corresponding best visiting order (so far)
         Mutable container for the best solution found so far.
 
     Returns
